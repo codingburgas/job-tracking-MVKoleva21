@@ -1,7 +1,7 @@
 
 namespace JobTracking.API
 {
-    public class Program
+    public class StartupApp
     {
         public static void Main(string[] args)
         {
@@ -13,7 +13,7 @@ namespace JobTracking.API
             builder.AddCors();
             builder.AddServices();
 
-            builder.Services.AddControllers();
+            builder.Services.AddEndpoints();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
@@ -32,7 +32,7 @@ namespace JobTracking.API
             app.UseAuthorization();
 
 
-            app.MapControllers();
+            app.MapEndpoints();
 
             app.Run();
         }
