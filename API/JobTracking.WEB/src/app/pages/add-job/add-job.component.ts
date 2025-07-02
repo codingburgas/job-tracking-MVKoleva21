@@ -9,14 +9,16 @@ import { Job } from '../../../core/models/job.model';
   styleUrls: ['./add-job.component.css']
 })
 export class AddJobComponent {
-  job: Job = this.jobService.getEmptyJob();
+  job!: Job;
   editing = false;
 
   constructor(private jobService: JobService, private router: Router) {
     const editJob = this.jobService.getEditingJob();
-    if (editJob) {
-      this.job = { ...editJob };
+    if (editJob !== undefined && editJob !== null && typeof editJob === 'object') {
+      this.job = Object.assign({}, editJob);
       this.editing = true;
+    } else {
+      this.job = this.jobService.getEmptyJob();
     }
   }
 

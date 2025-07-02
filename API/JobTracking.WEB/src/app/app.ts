@@ -8,6 +8,11 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './app.css'
 })
 export class App {
+countByStatus(arg0: string) {
+throw new Error('Method not implemented.');
+}
+jobs: any;
+userName: any;
 deleteJobApplication(arg0: any) {
 throw new Error('Method not implemented.');
 }

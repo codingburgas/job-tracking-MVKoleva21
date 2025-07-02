@@ -1,0 +1,89 @@
+<div class="container dashboard fade-in">
+  <div class="dashboard-header">
+    <h1 class="welcome-text">Welcome back, {{ userName }}!</h1>
+    <p class="auth-subtitle">Here's an overview of your job applications</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-header">
+        <div>
+          <div class="stat-title">Total Applications</div>
+          <div class="stat-value">{{ jobs.length }}</div>
+        </div>
+        <div class="stat-icon" style="background: #ebf8ff; color: #3182ce;">
+          <i class="fas fa-briefcase"></i>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div>
+          <div class="stat-title">Pending</div>
+          <div class="stat-value">{{ countByStatus('pending') }}</div>
+        </div>
+        <div class="stat-icon" style="background: #fef5e7; color: #d69e2e;">
+          <i class="fas fa-clock"></i>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div>
+          <div class="stat-title">Interviews</div>
+          <div class="stat-value">{{ countByStatus('interview') }}</div>
+        </div>
+        <div class="stat-icon" style="background: #e6fffa; color: #319795;">
+          <i class="fas fa-calendar"></i>
+        </div>
+      </div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-header">
+        <div>
+          <div class="stat-title">Accepted</div>
+          <div class="stat-value">{{ countByStatus('accepted') }}</div>
+        </div>
+        <div class="stat-icon" style="background: #f0fff4; color: #38a169;">
+          <i class="fas fa-check-circle"></i>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="jobs-section">
+    <div class="section-header">
+      <h2 class="section-title">Recent Applications</h2>
+      <a routerLink="/add-job" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Job
+      </a>
+    </div>
+
+    <div *ngFor="let job of jobs | slice:0:3" class="job-card slide-in">
+      <div class="job-header">
+        <div>
+          <h3 class="job-title">{{ job.title }}</h3>
+          <p class="job-company">{{ job.company }}</p>
+        </div>
+        <span class="status-badge status-{{ job.status }}">{{ job.status }}</span>
+      </div>
+      <div class="job-meta">
+        <div class="meta-item">
+          <i class="fas fa-map-marker-alt"></i> {{ job.location }}
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-dollar-sign"></i> {{ job.salary }}
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-calendar-alt"></i> Applied: {{ job.appliedDate }}
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="jobs.length === 0" style="text-align:center; color: #718096;">
+      <i class="fas fa-briefcase" style="font-size:3rem;"></i>
+      <h3>No job applications yet</h3>
+      <a routerLink="/add-job" class="btn btn-primary">Add First Job</a>
+    </div>
+  </div>
+</div>
