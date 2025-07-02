@@ -1,0 +1,95 @@
+<div class="container dashboard fade-in">
+  <div class="jobs-section">
+    <div class="section-header">
+      <h2 class="section-title">My Job Applications</h2>
+      <a routerLink="/add-job" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add New Job
+      </a>
+    </div>
+
+    <div class="search-filter">
+      <input
+        type="text"
+        class="form-input search-input"
+        placeholder="Search jobs..."
+        [(ngModel)]="searchTerm"
+      />
+      <select class="filter-select" [(ngModel)]="filterStatus">
+        <option value="">All Status</option>
+        <option value="pending">Pending</option>
+        <option value="interview">Interview</option>
+        <option value="accepted">Accepted</option>
+        <option value="rejected">Rejected</option>
+      </select>
+    </div>
+
+    <div
+      *ngFor="let job of filteredJobs()"
+      class="job-card slide-in"
+    >
+      <div class="job-header">
+        <div>
+          <h3 class="job-title">{{ job.title }}</h3>
+          <p class="job-company">{{ job.company }}</p>
+        </div>
+        <span class="status-badge status-{{ job.status }}">
+          {{ job.status }}
+        </span>
+      </div>
+      <div class="job-meta">
+        <div class="meta-item">
+          <i class="fas fa-map-marker-alt"></i>
+          {{ job.location }}
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-dollar-sign"></i>
+          {{ job.salary }}
+        </div>
+        <div class="meta-item">
+          <i class="fas fa-calendar-alt"></i>
+          Applied: {{ job.appliedDate | date }}
+        </div>
+      </div>
+      <p *ngIf="job.description">
+        {{ job.description | slice:0:150 }}
+        {{ job.description.length > 150 ? '...' : '' }}
+      </p>
+      <div class="job-actions">
+        <select
+          class="filter-select btn-sm"
+          [(ngModel)]="job.status"
+          (change)="updateStatus(job)"
+        >
+          <option value="pending">Pending</option>
+          <option value="interview">Interview</option>
+          <option value="accepted">Accepted</option>
+          <option value="rejected">Rejected</option>
+        </select>
+        <button
+          class="btn btn-secondary btn-sm"
+          (click)="edit(job)"
+        >
+          <i class="fas fa-edit"></i> Edit
+        </button>
+        <button
+          class="btn btn-danger btn-sm"
+          (click)="delete(job.id)"
+        >
+          <i class="fas fa-trash"></i> Delete
+        </button>
+      </div>
+    </div>
+
+    <div
+      *ngIf="filteredJobs().length === 0"
+      style="text-align: center; color: #718096;"
+    >
+      <i class="fas fa-search" style="font-size: 3rem;"></i>
+      <h3>No jobs found</h3>
+      <p>Try adjusting your search criteria or add a new job.</p>
+      <a routerLink="/add-job" class="btn btn-primary">
+        <i class="fas fa-plus"></i> Add Job
+      </a>
+    </div>
+  </div>
+</div>

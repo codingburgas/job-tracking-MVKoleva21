@@ -1,0 +1,19 @@
+namespace JobTracking.Domain.Models
+{
+    public class JobApplication
+    {
+        public int Id { get; set; }
+        public string CompanyName { get; set; } = string.Empty;
+        public string Position { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public DateTime ApplicationDate { get; set; }
+        public string Status { get; set; } = string.Empty;
+        public string? Notes { get; set; }
+        public string? ContactEmail { get; set; }
+        public string? ContactPhone { get; set; }
+        public decimal? SalaryRange { get; set; }
+        public string? Location { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public DateTime? UpdatedAt { get; set; }
+    }
+}

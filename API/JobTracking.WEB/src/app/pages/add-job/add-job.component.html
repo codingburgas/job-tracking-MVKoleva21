@@ -1,0 +1,100 @@
+<div class="container dashboard fade-in">
+  <div class="job-form">
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ editing ? 'Edit Job Application' : 'Add New Job Application' }}
+      </h2>
+      <a routerLink="/jobs" class="btn btn-secondary">
+        <i class="fas fa-arrow-left"></i> Back to Jobs
+      </a>
+    </div>
+
+    <form (ngSubmit)="save()">
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Job Title</label>
+          <input
+            type="text"
+            [(ngModel)]="job.title"
+            name="title"
+            class="form-input"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Company</label>
+          <input
+            type="text"
+            [(ngModel)]="job.company"
+            name="company"
+            class="form-input"
+            required
+          />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Location</label>
+          <input
+            type="text"
+            [(ngModel)]="job.location"
+            name="location"
+            class="form-input"
+          />
+        </div>
+        <div class="form-group">
+          <label class="form-label">Salary Range</label>
+          <input
+            type="text"
+            [(ngModel)]="job.salary"
+            name="salary"
+            class="form-input"
+          />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Job Description</label>
+        <textarea
+          [(ngModel)]="job.description"
+          name="description"
+          class="form-textarea"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Requirements</label>
+        <textarea
+          [(ngModel)]="job.requirements"
+          name="requirements"
+          class="form-textarea"
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Application URL</label>
+        <input
+          type="url"
+          [(ngModel)]="job.applicationUrl"
+          name="applicationUrl"
+          class="form-input"
+        />
+      </div>
+
+      <div style="display: flex; gap: 1rem;">
+        <button type="submit" class="btn btn-success">
+          <i class="fas fa-save"></i>
+          {{ editing ? 'Update Job' : 'Save Job' }}
+        </button>
+        <button
+          type="button"
+          class="btn btn-secondary"
+          (click)="cancel()"
+        >
+          <i class="fas fa-times"></i> Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
